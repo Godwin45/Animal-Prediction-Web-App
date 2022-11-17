@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>Image Processing Flask App running with Machine Learning</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+   </head>
+<body>
+
+                           <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color: rgb(107, 107, 243);">
+        <h1 class="navbar-brand" href="">Image Classification App</h1>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Download</a>
+            </li>
+        </ul>
+     </div>
+    </nav>
+<!-- Upload button -->
+    <div class="container" id="myrow">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" id="uploadimg" href="#upload-image">Upload Image</a>
+            </li>
+          </ul>
+    
+          <!-- tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane active" id="upload-image" role="tabpanel" aria-labelledby="uploadimg">
+                  <div class="row">
+                      <div class="col">
+                          <form action="#" method="POST" enctype="multipart/form-data">
+                            <!-- file input -->
+                            <p>
+                                <input type="file" name="image_name" class="btn" style="background-color: #2471A3; color:azure" required>
+                            </p>
+                            <!-- Submit button -->
+                            <p>
+                                <input type="submit" value="submit" class="btn" style="background-color: #2471A3; color:azure">
+                            </p>
+    
+                            <p align="center"> <strong>Intructions:</strong> <br>
+                                Only upload the file with extention ".png", "jpg", ".jpeg"
+                                
+                            </p>
+                        
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+    <br><br>
+    {% if fileupload %}
+
+    <div class = "container" id = "myrow_result">
+        <div class = "row">
+            <div class = "col col-8">
+                    <table>
+                        <tr>
+                            <th>Label</th>
+                            <th>Confidence Score</th>
+                        </tr>
+                    
+                    {% for name, score in  data.items() %}
+                            <tr>
+                                <td>{{ name }}</td>
+                                <td>{{ score }}</td>
+                            </tr>
+                        
+                        
+                    {% endfor %}
+                </table>
+            </div>
+            <div class = "col col-4">
+                <img src="/static/upload/{{ image_filename }}" alt="uploaded image" width = "300" height = "{{ height }}">
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <style>
+        #myrow_result{
+            background-color:aliceblue;
+            padding: 5%;
+            align-content: center;
+
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td{
+            border: 1px solid black;
+        }
+    </style>
+     
+ <!-- Footer -->
+ <div class = "container">
+ <footer id="footer">
+    
+    <p>© Copyright Godwin</p>
+
+  </footer>
+</div>
+    
+</body>
+</html>
